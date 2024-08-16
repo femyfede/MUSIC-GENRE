@@ -1,0 +1,51 @@
+{% load static %}
+
+{% block title %} CREATED BY<br><b>femyfede</b> {% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-image: url('{% static "img/music.gif" %}');
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+        width: 100%;
+        position: fixed;
+    }
+    .form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+    .form {
+        background-image:url('{% static "img/pic10.jpg" %}') ;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(248, 8, 8, 0.927);
+    
+    }
+</style>
+
+<div class="form-container">
+    <div class="form">
+        <h1>Predict Music Genre</h1>
+        <form method="post" action="{% url 'index' %}">
+            {% csrf_token %}
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required><br><br>
+            
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select><br><br>
+
+            <button type="submit">Predict</button>
+        </form>
+        {% if prediction %}
+            <h2>Predicted Genre: {{ prediction }}</h2>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
